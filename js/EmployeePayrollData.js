@@ -26,10 +26,10 @@ class EmployeePayrollData{
         this._gender = gender;
     }
     get department() {
-        return this._department;
+        return this._deparment;
     }
     set department(department){
-        this._department=department;
+        this._deparment=department;
     }
     get salary(){
         return this._salary;
@@ -49,5 +49,16 @@ class EmployeePayrollData{
     set startDate(startDate){
         
         this._startDate=startDate;
+    }
+    set startDate(startDate) {
+        let currentDate = new Date();
+        if (startDate > currentDate) {
+            throw "start date is a future date";
+        }
+        var diff = Math.abs(currentDate.getTime - startDate.getTime());
+        if (diff / (1000 * 60 * 60 * 24) > 30) {
+            throw 'start date is beyond 30 days'
+        }
+        this._startDate = startDate;
     }
 }
